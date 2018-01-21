@@ -45,8 +45,8 @@ function loadGrid() {
 	}
 	// Store current timer in a variable to clear later
 	ratingInterval = setInterval(function () {
-		// If 20 seconds have passed, reduce the rating
-		if (timeTaken > 0 && timeTaken % 20 === 0) {
+		// If 15 moves are made, reduce the rating
+		if (noOfMoves % 15 === 0 && rating > 1) {
 			$('.star-rating-' + rating).removeClass('fa-star').addClass('fa-star-o');
 			rating--;
 		}

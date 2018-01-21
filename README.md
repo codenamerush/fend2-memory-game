@@ -1,20 +1,22 @@
 # Memory Game Project
 
-## Table of Contents
+An interactive puzzle game that _**tests your memory.**_ It helps build focus and tracks the time and number of moves you take to complete the game.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## How To Play
 
-## Instructions
+* Each game will have a 4x4 grid layout having 8 pairs of cards arranged randomly each time.
+* The player is expected to open one card at a time and match two cards.
+* If the two open cards are not a match, they will close back up and the player would need to choose two different cards.
+* If the cards are a match, they will remain open and the next two cards would need to be opened up.
+* The number of moves is incremented every time 2 cards are opened.
+* The game starts with 3 stars and a star is deducted after every 15 moves.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## What you can expect from the game
 
-To get started, open `js/app.js` and start building out the app's functionality
+* It helps you be more attentive and improves your concentration.
+* The rating system and timer encourage you to compete with yourself.
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Resources
 
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* The game uses icons from Font Awesome.
+* The card flipping and shake effects are animations from Animate.
