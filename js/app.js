@@ -32,7 +32,6 @@ var timeTaken;
 	$deck.on('click', cardSymbolClass, stopPropagationIfMatched);
 })();
 
-
 function loadGrid() {
 	// Randomly arrange the cards in a grid
 	var grid = cardTypes.concat(cardTypes);
@@ -44,11 +43,15 @@ function loadGrid() {
 		$deck.append(getCardHtml(shuffledGrid[index]));
 	}
 	// Store current timer in a variable to clear later
-	ratingInterval = setInterval(function () {
+	ratingInterval = setInterval(function() {
 		// If 15 moves are made, reduce the rating
-		if (noOfMoves % 15 === 0 && rating > 1) {
-			$('.star-rating-' + rating).removeClass('fa-star').addClass('fa-star-o');
-			rating--;
+		if (noOfMoves > 1) {
+			if (noOfMoves % 15 === 0 && rating > 1) {
+				$('.star-rating-' + rating)
+					.removeClass('fa-star')
+					.addClass('fa-star-o');
+				rating--;
+			}
 		}
 		// Display timer in minutes and seconds
 		$('.minutes').text(parseInt(timeTaken / 60, 10));
@@ -62,19 +65,23 @@ function resetPlayGround() {
 	$deck.text('');
 	rating = 3;
 	timeTaken = 0;
-	$('.minutes').text(0); 
+	$('.minutes').text(0);
 	$('.seconds').text(0);
 	if (ratingInterval) {
 		// Clear existing timer to start everything from 0
 		clearInterval(ratingInterval);
 	}
 	$moves.text(noOfMoves);
-	$('.fa-star-o').removeClass('fa-star-o').addClass('fa-star')
+	$('.fa-star-o')
+		.removeClass('fa-star-o')
+		.addClass('fa-star');
 }
 
 // Pre-provided function
 function shuffle(array) {
-	var currentIndex = array.length, temporaryValue, randomIndex;
+	var currentIndex = array.length,
+		temporaryValue,
+		randomIndex;
 
 	while (currentIndex !== 0) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
@@ -104,7 +111,6 @@ function reset() {
 	});
 }
 
-
 function handleCardClick(e) {
 	var $target = $(e.target);
 	var currentCardType;
@@ -121,13 +127,14 @@ function handleCardClick(e) {
 		currentCardType = openCards[openCards.length - 1];
 		// Mark cards if matched
 		if (currentCardType === lastCardType) {
-			$('.fa-' + currentCardType).parent().addClass('match');
+			$('.fa-' + currentCardType)
+				.parent()
+				.addClass('match');
 		} else {
 			// Mark current match as wrong and reset cards to old position
 			markWrong(lastCardType, currentCardType);
 			resetCards(lastCardType, currentCardType);
 		}
-
 	}
 	// If openCards = 16, means we have a game complete
 	if (openCards.length === 16) {
@@ -153,8 +160,7 @@ function showCard($card) {
 	openCards.push(currentCardType);
 }
 
-
-// Finds the card type from the card HTML element 
+// Finds the card type from the card HTML element
 function getCardType($element) {
 	for (index in cardTypes) {
 		if ($element.find('.fa-' + cardTypes[index]).length) {
@@ -184,15 +190,13 @@ function getCardElement(cardType) {
 	return $('.open .fa-' + cardType).parent();
 }
 
-
 // Wait for a few milliseconds for animation to complete and close the cards
 function resetCards(lastCardType, currentCardType) {
-	setTimeout(function () {
+	setTimeout(function() {
 		closeCard(lastCardType);
 		closeCard(currentCardType);
 	}, 900);
 }
-
 
 /*
 Get card element from card type, and removes open card classes
@@ -207,7 +211,6 @@ function closeCard(cardType) {
 		openCards.splice(index, 1);
 	}
 }
-
 
 // Resets the animation by removing all animation classes we used
 function resetAnimations($target) {
@@ -228,7 +231,14 @@ function flipEffect($card) {
 
 // Trick to stop click from propagating to parent if parent is already open
 function stopPropagationIfMatched(e) {
-	if ($(e.target).parent().hasClass('match') || $(e.target).parent().hasClass('open')) {
+	if (
+		$(e.target)
+			.parent()
+			.hasClass('match') ||
+		$(e.target)
+			.parent()
+			.hasClass('open')
+	) {
 		e.stopPropagation();
 	}
 }
